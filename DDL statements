@@ -1,0 +1,144 @@
+mysql> show schemas;
++--------------------+
+| Database           |
++--------------------+
+| demo               |
+| emp                |
+| information_schema |
+| mysql              |
+| performance_schema |
+| sakila             |
+| salesman           |
+| sys                |
+| world              |
++--------------------+
+9 rows in set (1.71 sec)
+
+mysql> use demo;
+Database changed
+mysql> show demo;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'demo' at line 1
+mysql> desc demo;
+ERROR 1146 (42S02): Table 'demo.demo' doesn't exist
+mysql> show tables;
++----------------+
+| Tables_in_demo |
++----------------+
+| customer       |
++----------------+
+1 row in set (0.34 sec)
+
+mysql> select * from customer;
++---------+-------------+-----------+-------------+
+| name    | customer_id | city      | phone_numbe |
++---------+-------------+-----------+-------------+
+| sindhu  |         123 | Magadi    |    79894567 |
+| chaitra |         124 | mysore    |    98794567 |
+| raghu   |         126 | bangalore |    87987956 |
+| shruti  |         127 | bijapur   |    78763345 |
++---------+-------------+-----------+-------------+
+4 rows in set (0.38 sec)
+
+mysql> use emp;
+Database changed
+mysql> show tables;
+Empty set (0.00 sec)
+
+mysql> use salesman;
+Database changed
+mysql> use salesman;
+Database changed
+mysql> show tables;
++--------------------+
+| Tables_in_salesman |
++--------------------+
+| country            |
+| salesman           |
++--------------------+
+2 rows in set (0.00 sec)
+
+
+mysql> select * from country;
++------------+-------------+--------+
+| Country_id | Name        | States |
++------------+-------------+--------+
+| A23S7      | India       |     29 |
+| B56S7      | Russia      |     56 |
+| D67S7      | South Korea |     16 |
+| E87S7      | Africa      |     43 |
++------------+-------------+--------+
+4 rows in set (0.12 sec)
+
+mysql> select * from salesman;
+Empty set (0.15 sec)
+
+mysql> use salesman;
+Database changed
+mysql> select * from salesman;
+Empty set (0.00 sec)
+
+mysql> alter table salesman
+    ->
+    -> ;
+Query OK, 0 rows affected (0.45 sec)
+
+
+ALTER COMMAND
+
+mysql> desc country;
++------------+-------------+------+-----+---------+-------+
+| Field      | Type        | Null | Key | Default | Extra |
++------------+-------------+------+-----+---------+-------+
+| Country_id | varchar(6)  | NO   |     | NULL    |       |
+| Name       | varchar(20) | NO   |     | NULL    |       |
+| States     | int         | YES  |     | NULL    |       |
++------------+-------------+------+-----+---------+-------+
+3 rows in set (0.31 sec)
+
+mysql> alter table country
+    -> add population varchar(5) not null;
+Query OK, 0 rows affected (3.12 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> desc country;
++------------+-------------+------+-----+---------+-------+
+| Field      | Type        | Null | Key | Default | Extra |
++------------+-------------+------+-----+---------+-------+
+| Country_id | varchar(6)  | NO   |     | NULL    |       |
+| Name       | varchar(20) | NO   |     | NULL    |       |
+| States     | int         | YES  |     | NULL    |       |
+| population | varchar(5)  | NO   |     | NULL    |       |
++------------+-------------+------+-----+---------+-------+
+4 rows in set (0.05 sec)
+
+
+mysql> alter table country
+    -> modify Country_id primary key not null;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'primary key not null' at line 2
+mysql> alter table country
+    -> modify Country_id primary key ;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'primary key' at line 2
+mysql> alter table country
+    -> modify Country_id varchar(6) not null primary key;
+Query OK, 0 rows affected (3.72 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> desc country;
++------------+-------------+------+-----+---------+-------+
+| Field      | Type        | Null | Key | Default | Extra |
++------------+-------------+------+-----+---------+-------+
+| Country_id | varchar(6)  | NO   | PRI | NULL    |       |
+| Name       | varchar(20) | NO   |     | NULL    |       |
+| States     | int         | YES  |     | NULL    |       |
+| population | varchar(5)  | NO   |     | NULL    |       |
++------------+-------------+------+-----+---------+-------+
+4 rows in set (0.08 sec)
+
+
+
+
+
+
+
+
+
