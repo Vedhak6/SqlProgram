@@ -1,0 +1,94 @@
+
+DELETE STATEMENT
+
+mysql> use salesman;
+Database changed
+mysql> select * from salesmandetails;
++-------------+--------+-----------+
+| Salesman_id | Name   | City      |
++-------------+--------+-----------+
+| 12          | vedha  | bangalore |
+| 12          | vedha  | bangalore |
+| 12          | vedha  | bangalore |
+| 12          | vedha  | bangalore |
+| 12          | vedha  | bangalore |
+| 13          | sindhu | magadi    |
+| 12          | vedha  | bangalore |
+| 13          | sindhu | magadi    |
+| 12          | vedha  | bangalore |
+| 13          | sindhu | magadi    |
++-------------+--------+-----------+
+10 rows in set (0.08 sec)
+
+mysql> delete from salesmandetails where Salesman_id=12;
+Query OK, 7 rows affected (0.38 sec)
+
+mysql> select * from salesmandetails;
++-------------+--------+--------+
+| Salesman_id | Name   | City   |
++-------------+--------+--------+
+| 13          | sindhu | magadi |
+| 13          | sindhu | magadi |
+| 13          | sindhu | magadi |
++-------------+--------+--------+
+3 rows in set (0.05 sec)
+
+mysql> delete from salesmandetails where Salesman_id=13;
+Query OK, 3 rows affected (0.13 sec)
+
+mysql> select * from salesmandetails;
+Empty set (0.00 sec)
+
+
+INSERT STATEMENT
+
+mysql> select * from salesmandetails;
+Empty set (0.00 sec)
+
+mysql> insert into salesmandetails values(12,'vedha','bangalore');
+Query OK, 1 row affected (0.07 sec)
+
+mysql> insert into salesmandetails values(13,'sindhu','magadi');
+Query OK, 1 row affected (0.15 sec)
+
+mysql> insert into salesmandetails values(14,'chaitra','bangalore');
+Query OK, 1 row affected (0.06 sec)
+
+mysql> select * from salesmandetails;
++-------------+---------+-----------+
+| Salesman_id | Name    | City      |
++-------------+---------+-----------+
+| 12          | vedha   | bangalore |
+| 13          | sindhu  | magadi    |
+| 14          | chaitra | bangalore |
++-------------+---------+-----------+
+3 rows in set (0.00 sec)
+
+
+UPDATE STATEMENT
+
+ysql> select * from salesmandetails;
++-------------+---------+-----------+
+| Salesman_id | Name    | City      |
++-------------+---------+-----------+
+| 12          | vedha   | bangalore |
+| 13          | sindhu  | magadi    |
+| 14          | chaitra | bangalore |
++-------------+---------+-----------+
+3 rows in set (0.00 sec)
+
+mysql> UPDATE salesmandetails
+    -> SET CITY='chitradurga'
+    -> where salesman_id=14;
+Query OK, 1 row affected (0.17 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> select * from salesmandetails;
++-------------+---------+-------------+
+| Salesman_id | Name    | City        |
++-------------+---------+-------------+
+| 12          | vedha   | bangalore   |
+| 13          | sindhu  | magadi      |
+| 14          | chaitra | chitradurga |
++-------------+---------+-------------+
+3 rows in set (0.05 sec)
