@@ -1,0 +1,158 @@
+SPECIAL OPERATORS
+
+mysql> use emp;
+Database changed
+mysql> desc emp;
++--------+---------------+------+-----+---------+----------------+
+| Field  | Type          | Null | Key | Default | Extra          |
++--------+---------------+------+-----+---------+----------------+
+| emp_id | int           | NO   | PRI | NULL    | auto_increment |
+| ename  | varchar(20)   | NO   |     | NULL    |                |
+| job    | varchar(10)   | NO   |     | NULL    |                |
+| sal    | decimal(10,2) | YES  |     | NULL    |                |
+| deptno | int           | YES  | MUL | NULL    |                |
++--------+---------------+------+-----+---------+----------------+
+5 rows in set (0.58 sec)
+
+mysql> select * from emp;
++--------+--------+---------+---------+--------+
+| emp_id | ename  | job     | sal     | deptno |
++--------+--------+---------+---------+--------+
+|   1001 | betty  | manager | 3000.00 |     50 |
+|   1002 | john   | manager | 2500.00 |     52 |
+|   1003 | martin | clerk   | 1100.00 |     56 |
+|   1004 | cindy  | analyst | 2700.00 |     51 |
+|   1005 | james  | trainee | 2000.00 |     50 |
+|   1006 | anna   | clerk   | 1000.00 |     52 |
+|   1007 | steven | analyst | 2000.00 |     55 |
+|   1008 | mark   | trainee |  900.00 |     50 |
++--------+--------+---------+---------+--------+
+8 rows in set (0.00 sec)
+
+mysql> select * from emp where sal < 1500;
++--------+--------+---------+---------+--------+
+| emp_id | ename  | job     | sal     | deptno |
++--------+--------+---------+---------+--------+
+|   1003 | martin | clerk   | 1100.00 |     56 |
+|   1006 | anna   | clerk   | 1000.00 |     52 |
+|   1008 | mark   | trainee |  900.00 |     50 |
++--------+--------+---------+---------+--------+
+3 rows in set (0.00 sec)
+
+mysql> select * from emp where deptno=56 or deptno=55;
++--------+--------+---------+---------+--------+
+| emp_id | ename  | job     | sal     | deptno |
++--------+--------+---------+---------+--------+
+|   1007 | steven | analyst | 2000.00 |     55 |
+|   1003 | martin | clerk   | 1100.00 |     56 |
++--------+--------+---------+---------+--------+
+2 rows in set (0.10 sec)
+
+mysql> select * from emp where deptno not in(50,51);
++--------+--------+---------+---------+--------+
+| emp_id | ename  | job     | sal     | deptno |
++--------+--------+---------+---------+--------+
+|   1002 | john   | manager | 2500.00 |     52 |
+|   1006 | anna   | clerk   | 1000.00 |     52 |
+|   1007 | steven | analyst | 2000.00 |     55 |
+|   1003 | martin | clerk   | 1100.00 |     56 |
++--------+--------+---------+---------+--------+
+4 rows in set (0.03 sec)
+
+mysql> select * from emp where ename like '_1%';
+Empty set (0.06 sec)
+
+mysql> select * from emp where job like 'm%';
++--------+-------+---------+---------+--------+
+| emp_id | ename | job     | sal     | deptno |
++--------+-------+---------+---------+--------+
+|   1001 | betty | manager | 3000.00 |     50 |
+|   1002 | john  | manager | 2500.00 |     52 |
++--------+-------+---------+---------+--------+
+2 rows in set (0.00 sec)
+
+mysql> select * from emp where ename like 'j%';
++--------+-------+---------+---------+--------+
+| emp_id | ename | job     | sal     | deptno |
++--------+-------+---------+---------+--------+
+|   1002 | john  | manager | 2500.00 |     52 |
+|   1005 | james | trainee | 2000.00 |     50 |
++--------+-------+---------+---------+--------+
+2 rows in set (0.00 sec)
+
+mysql> select * from emp where job='manager' and sal=3000 and deptno=50;
++--------+-------+---------+---------+--------+
+| emp_id | ename | job     | sal     | deptno |
++--------+-------+---------+---------+--------+
+|   1001 | betty | manager | 3000.00 |     50 |
++--------+-------+---------+---------+--------+
+1 row in set (0.00 sec)
+
+mysql> select * from emp where job='manager';
++--------+-------+---------+---------+--------+
+| emp_id | ename | job     | sal     | deptno |
++--------+-------+---------+---------+--------+
+|   1001 | betty | manager | 3000.00 |     50 |
+|   1002 | john  | manager | 2500.00 |     52 |
++--------+-------+---------+---------+--------+
+2 rows in set (0.00 sec)
+
+mysql> select * from emp where ename like '%a%a%';
++--------+-------+-------+---------+--------+
+| emp_id | ename | job   | sal     | deptno |
++--------+-------+-------+---------+--------+
+|   1006 | anna  | clerk | 1000.00 |     52 |
++--------+-------+-------+---------+--------+
+1 row in set (0.00 sec)
+
+mysql> select * from emp where sal between 1000 and 3000;
++--------+--------+---------+---------+--------+
+| emp_id | ename  | job     | sal     | deptno |
++--------+--------+---------+---------+--------+
+|   1001 | betty  | manager | 3000.00 |     50 |
+|   1002 | john   | manager | 2500.00 |     52 |
+|   1003 | martin | clerk   | 1100.00 |     56 |
+|   1004 | cindy  | analyst | 2700.00 |     51 |
+|   1005 | james  | trainee | 2000.00 |     50 |
+|   1006 | anna   | clerk   | 1000.00 |     52 |
+|   1007 | steven | analyst | 2000.00 |     55 |
++--------+--------+---------+---------+--------+
+7 rows in set (0.04 sec)
+
+mysql> select * from emp where ename like '_n%';
++--------+-------+-------+---------+--------+
+| emp_id | ename | job   | sal     | deptno |
++--------+-------+-------+---------+--------+
+|   1006 | anna  | clerk | 1000.00 |     52 |
++--------+-------+-------+---------+--------+
+1 row in set (0.00 sec)
+
+mysql> select * from emp where emp_id like '_0%';
++--------+--------+---------+---------+--------+
+| emp_id | ename  | job     | sal     | deptno |
++--------+--------+---------+---------+--------+
+|   1001 | betty  | manager | 3000.00 |     50 |
+|   1002 | john   | manager | 2500.00 |     52 |
+|   1003 | martin | clerk   | 1100.00 |     56 |
+|   1004 | cindy  | analyst | 2700.00 |     51 |
+|   1005 | james  | trainee | 2000.00 |     50 |
+|   1006 | anna   | clerk   | 1000.00 |     52 |
+|   1007 | steven | analyst | 2000.00 |     55 |
+|   1008 | mark   | trainee |  900.00 |     50 |
++--------+--------+---------+---------+--------+
+8 rows in set (0.00 sec)
+
+mysql> select * from emp where ename like '____';
++--------+-------+---------+---------+--------+
+| emp_id | ename | job     | sal     | deptno |
++--------+-------+---------+---------+--------+
+|   1002 | john  | manager | 2500.00 |     52 |
+|   1006 | anna  | clerk   | 1000.00 |     52 |
+|   1008 | mark  | trainee |  900.00 |     50 |
++--------+-------+---------+---------+--------+
+3 rows in set (0.00 sec)
+
+mysql>
+
+
+
