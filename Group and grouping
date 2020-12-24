@@ -1,0 +1,118 @@
+
+----------------------GROUP AND GROUPING---------------------------
+
+mysql> use emp;
+Database changed
+mysql> select * from emp;
++--------+--------+---------+---------+--------+------------+------+
+| emp_id | ename  | job     | sal     | deptno | commission | mgr  |
++--------+--------+---------+---------+--------+------------+------+
+|   1001 | betty  | manager | 3000.00 |     50 |       NULL | 7645 |
+|   1002 | john   | manager | 2500.00 |     52 |       NULL | 7569 |
+|   1003 | martin | clerk   | 1100.00 |     56 |        300 | 7134 |
+|   1004 | cindy  | analyst | 2700.00 |     51 |        500 | 7568 |
+|   1005 | james  | trainee | 2000.00 |     50 |       NULL | 7098 |
+|   1006 | anna   | clerk   | 1000.00 |     52 |        400 | 7435 |
+|   1007 | steven | analyst | 2000.00 |     55 |       NULL | 7543 |
+|   1008 | mark   | trainee |  900.00 |     50 |       NULL | 7013 |
+|   1009 | steven | clerk   |  870.00 |     51 |        100 | 7098 |
++--------+--------+---------+---------+--------+------------+------+
+9 rows in set (0.25 sec)
+
+mysql> select job ,max(sal)
+    -> from emp
+    -> group by job;
++---------+----------+
+| job     | max(sal) |
++---------+----------+
+| manager |  3000.00 |
+| clerk   |  1100.00 |
+| analyst |  2700.00 |
+| trainee |  2000.00 |
++---------+----------+
+4 rows in set (0.17 sec)
+
+mysql> select max(sal) as "highest salary"
+    -> from emp;
++----------------+
+| highest salary |
++----------------+
+|        3000.00 |
++----------------+
+1 row in set (0.05 sec)
+
+mysql> select count(*)
+    -> from emp;
++----------+
+| count(*) |
++----------+
+|        9 |
++----------+
+1 row in set (0.26 sec)
+
+mysql> select count(*),count(empno)
+    -> from emp;
+ERROR 1054 (42S22): Unknown column 'empno' in 'field list'
+mysql> select count(*),count(emp_id)
+    -> from emp;
++----------+---------------+
+| count(*) | count(emp_id) |
++----------+---------------+
+|        9 |             9 |
++----------+---------------+
+1 row in set (0.03 sec)
+
+
+mysql> select count(*),count(commission)
+    -> from emp;
++----------+-------------------+
+| count(*) | count(commission) |
++----------+-------------------+
+|        9 |                 4 |
++----------+-------------------+
+1 row in set (0.00 sec)
+
+mysql> select count(*)
+    -> from emp
+    -> where deptno=50;
++----------+
+| count(*) |
++----------+
+|        3 |
++----------+
+1 row in set (0.05 sec)
+
+mysql>
+
+
+----------------HAVING CLAUSE----------------
+
+mysql> select job,max(sal)
+    -> from emp
+    -> group by job
+    -> having max(sal)>1500;
++---------+----------+
+| job     | max(sal) |
++---------+----------+
+| manager |  3000.00 |
+| analyst |  2700.00 |
+| trainee |  2000.00 |
++---------+----------+
+3 rows in set (0.12 sec)
+
+mysql> select job,max(sal)
+    -> from emp
+    -> where deptno<>30
+    -> group by job
+    -> having max(sal)>1500
+    -> order by max(sal);
++---------+----------+
+| job     | max(sal) |
++---------+----------+
+| trainee |  2000.00 |
+| analyst |  2700.00 |
+| manager |  3000.00 |
++---------+----------+
+3 rows in set (0.11 sec)
+
+
