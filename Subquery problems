@@ -1,0 +1,169 @@
+
+1)
+
+mysql> select * from emp;
+ERROR 1046 (3D000): No database selected
+mysql> use emp;
+Database changed
+mysql> select * from emp;
++--------+--------+---------+---------+--------+------------+------+
+| emp_id | ename  | job     | sal     | deptno | commission | mgr  |
++--------+--------+---------+---------+--------+------------+------+
+|   1001 | betty  | manager | 3000.00 |     50 |       NULL | 7645 |
+|   1002 | john   | manager | 2500.00 |     52 |       NULL | 7569 |
+|   1003 | martin | clerk   | 1100.00 |     56 |        300 | 7134 |
+|   1004 | cindy  | analyst | 2700.00 |     51 |        500 | 7568 |
+|   1005 | james  | trainee | 2000.00 |     50 |       NULL | 7098 |
+|   1006 | anna   | clerk   | 1000.00 |     52 |        400 | 7435 |
+|   1007 | steven | analyst | 2000.00 |     55 |       NULL | 7543 |
+|   1008 | mark   | trainee |  900.00 |     50 |       NULL | 7013 |
+|   1009 | steven | clerk   |  870.00 |     51 |        100 | 7098 |
++--------+--------+---------+---------+--------+------------+------+
+9 rows in set (2.95 sec)
+
+mysql> select * from emp
+    -> where deptno in (select deptno from dept
+    -> where location like '%o%');
+ERROR 1054 (42S22): Unknown column 'location' in 'where clause'
+mysql> select * from dept;
++--------+----------+
+| deptno | deptname |
++--------+----------+
+|     50 | Cs       |
+|     51 | is       |
+|     52 | ec       |
+|     53 | Me       |
+|     54 | EE       |
+|     55 | Cs       |
+|     56 | Is       |
++--------+----------+
+7 rows in set (0.10 sec)
+
+mysql> select * from emp
+    -> where deptno in (select deptno from dept
+    -> where deptname like '%e%');
++--------+-------+---------+---------+--------+------------+------+
+| emp_id | ename | job     | sal     | deptno | commission | mgr  |
++--------+-------+---------+---------+--------+------------+------+
+|   1002 | john  | manager | 2500.00 |     52 |       NULL | 7569 |
+|   1006 | anna  | clerk   | 1000.00 |     52 |        400 | 7435 |
++--------+-------+---------+---------+--------+------------+------+
+2 rows in set (0.18 sec)
+
+
+2) 
+mysql> select deptname from dept
+    -> where deptno in(select deptno from emp
+    -> group by deptno
+    -> having count(*) >0);
++----------+
+| deptname |
++----------+
+| Cs       |
+| is       |
+| ec       |
+| Cs       |
+| Is       |
++----------+
+5 rows in set (0.48 sec)
+
+3)List 
+mysql> select deptname from dept
+    -> where deptno in(select deptno from emp
+    -> group by deptno
+    -> having count(*) >=2);
++----------+
+| deptname |
++----------+
+| Cs       |
+| is       |
+| ec       |
++----------+
+3 rows in set (0.00 sec)
+
+4)
+mysql> select deptname from dept
+    -> where deptno in(select deptno from emp
+    -> where job='clerk'
+    -> group by job
+    -> having count('clerk')>=2);
++----------+
+| deptname |
++----------+
+| Is       |
++----------+
+1 row in set (0.18 sec)
+
+5)Displat the second max salary.
+mysql> select max(sal) from emp;
++----------+
+| max(sal) |
++----------+
+|  3000.00 |
++----------+
+1 row in set (0.07 sec)
+
+mysql> select ename,sal from emp order by sal desc;
++--------+---------+
+| ename  | sal     |
++--------+---------+
+| betty  | 3000.00 |
+| cindy  | 2700.00 |
+| john   | 2500.00 |
+| james  | 2000.00 |
+| steven | 2000.00 |
+| martin | 1100.00 |
+| anna   | 1000.00 |
+| mark   |  900.00 |
+| steven |  870.00 |
++--------+---------+
+9 rows in set (0.31 sec)
+
+
+mysql> select max(sal)
+    -> from emp
+    -> where sal<(select max(sal) from emp);
++----------+
+| max(sal) |
++----------+
+|  2700.00 |
++----------+
+1 row in set (0.28 sec)
+
+--------3rd maximum salary-----
+
+mysql> select max(sal)
+    -> from emp
+    -> where sal<(select max(sal) from emp
+    -> where sal<(select max(sal) from emp));
++----------+
+| max(sal) |
++----------+
+|  2500.00 |
++----------+
+1 row in set (0.53 sec)
+
+6)
+
+mysql> select * from dept
+    -> where deptno in (select deptno from emp);
++--------+----------+
+| deptno | deptname |
++--------+----------+
+|     50 | Cs       |
+|     51 | is       |
+|     52 | ec       |
+|     55 | Cs       |
+|     56 | Is       |
++--------+----------+
+5 rows in set (0.24 sec)
+
+mysql> select * from dept
+    -> where deptno not in (select deptno from emp);
++--------+----------+
+| deptno | deptname |
++--------+----------+
+|     53 | Me       |
+|     54 | EE       |
++--------+----------+
+2 rows in set (0.11 sec)
