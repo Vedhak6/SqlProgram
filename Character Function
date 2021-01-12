@@ -1,0 +1,244 @@
+
+CHARATER FUNCTION
+
+=>LOWER
+
+mysql> select lower ('ename') from emp;
++-----------------+
+| lower ('ename') |
++-----------------+
+| ename           |
+| ename           |
+| ename           |
+| ename           |
+| ename           |
+| ename           |
+| ename           |
+| ename           |
+| ename           |
++-----------------+
+9 rows in set (1.89 sec)
+
+=>
+mysql> select length(ename) from emp;
++---------------+
+| length(ename) |
++---------------+
+|             5 |
+|             4 |
+|             6 |
+|             5 |
+|             5 |
+|             4 |
+|             6 |
+|             4 |
+|             6 |
++---------------+
+9 rows in set (0.00 sec
+
+
+=>UPPER
+
+mysql> select upper(job) from emp;
++------------+
+| upper(job) |
++------------+
+| MANAGER    |
+| MANAGER    |
+| CLERK      |
+| ANALYST    |
+| TRAINEE    |
+| CLERK      |
+| ANALYST    |
+| TRAINEE    |
+| CLERK      |
++------------+
+9 rows in set (0.06 sec)
+
+=>LENGTH
+
+mysql> select * from emp
+    -> where length(ename)=5
+    -> and length(job)=5;
+Empty set (0.12 sec)
+
+mysql> select * from emp
+    -> where length(ename)=5
+    -> and length(job)=7;
++--------+-------+---------+------+------+---------+--------+----------+
+| emp_id | ename | job     | mgr  | comm | sal     | deptno | hiredate |
++--------+-------+---------+------+------+---------+--------+----------+
+|   1001 | betty | manager | 7645 | NULL | 3000.00 |     50 |     NULL |
+|   1004 | cindy | analyst | 7568 |  500 | 2700.00 |     51 |     NULL |
+|   1005 | james | trainee | 7098 | NULL | 2000.00 |     50 |     NULL |
++--------+-------+---------+------+------+---------+--------+----------+
+3 rows in set (0.00 sec)
+
+=>REPLACE
+
+mysql> select replace(ename,'in','XY')
+    -> from emp;
++--------------------------+
+| replace(ename,'in','XY') |
++--------------------------+
+| betty                    |
+| john                     |
+| martXY                   |
+| cXYdy                    |
+| james                    |
+| anna                     |
+| steven                   |
+| mark                     |
+| steven                   |
++--------------------------+
+9 rows in set (0.00 sec)
+
+=>
+mysql> select ename,replace(ename,'a','*')
+    -> from emp;
++--------+------------------------+
+| ename  | replace(ename,'a','*') |
++--------+------------------------+
+| betty  | betty                  |
+| john   | john                   |
+| martin | m*rtin                 |
+| cindy  | cindy                  |
+| james  | j*mes                  |
+| anna   | *nn*                   |
+| steven | steven                 |
+| mark   | m*rk                   |
+| steven | steven                 |
++--------+------------------------+
+9 rows in set (0.00 sec)
+
+=>SUBSTR
+
+mysql> select job,substr(job,1,3) from emp;
++---------+-----------------+
+| job     | substr(job,1,3) |
++---------+-----------------+
+| manager | man             |
+| manager | man             |
+| clerk   | cle             |
+| analyst | ana             |
+| trainee | tra             |
+| clerk   | cle             |
+| analyst | ana             |
+| trainee | tra             |
+| clerk   | cle             |
++---------+-----------------+
+9 rows in set (0.00 sec)
+
+=>
+mysql> select job,substr(job,-4) from emp;
++---------+----------------+
+| job     | substr(job,-4) |
++---------+----------------+
+| manager | ager           |
+| manager | ager           |
+| clerk   | lerk           |
+| analyst | lyst           |
+| trainee | inee           |
+| clerk   | lerk           |
+| analyst | lyst           |
+| trainee | inee           |
+| clerk   | lerk           |
++---------+----------------+
+9 rows in set (0.06 sec)
+
+=> display the emp names whose job starts with a man.
+
+mysql> select * from emp
+    -> where substr(job,1,3)='man';
++--------+-------+---------+------+------+---------+--------+----------+
+| emp_id | ename | job     | mgr  | comm | sal     | deptno | hiredate |
++--------+-------+---------+------+------+---------+--------+----------+
+|   1001 | betty | manager | 7645 | NULL | 3000.00 |     50 |     NULL |
+|   1002 | john  | manager | 7569 | NULL | 2500.00 |     52 |     NULL |
++--------+-------+---------+------+------+---------+--------+----------+
+2 rows in set (0.06 sec)
+
+=>
+mysql> select * from emp
+    -> where substr(job,1,2)='cl';
++--------+--------+-------+------+------+---------+--------+----------+
+| emp_id | ename  | job   | mgr  | comm | sal     | deptno | hiredate |
++--------+--------+-------+------+------+---------+--------+----------+         //similar
+|   1003 | martin | clerk | 7134 |  300 | 1100.00 |     56 |     NULL |
+|   1006 | anna   | clerk | 7435 |  400 | 1000.00 |     52 |     NULL |
+|   1009 | steven | clerk | 7098 |  100 |  870.00 |     51 |     NULL |
++--------+--------+-------+------+------+---------+--------+----------+
+3 rows in set (0.11 sec)
+
+mysql> select * from emp
+    -> where substr(job,1,2)='Cl';
++--------+--------+-------+------+------+---------+--------+----------+
+| emp_id | ename  | job   | mgr  | comm | sal     | deptno | hiredate |
++--------+--------+-------+------+------+---------+--------+----------+        //similar
+|   1003 | martin | clerk | 7134 |  300 | 1100.00 |     56 |     NULL |
+|   1006 | anna   | clerk | 7435 |  400 | 1000.00 |     52 |     NULL |
+|   1009 | steven | clerk | 7098 |  100 |  870.00 |     51 |     NULL |
++--------+--------+-------+------+------+---------+--------+----------+
+3 rows in set (0.00 sec)
+
+=>
+mysql> select * from emp
+    -> where substr(job,-3)='nee';
++--------+-------+---------+------+------+---------+--------+----------+
+| emp_id | ename | job     | mgr  | comm | sal     | deptno | hiredate |
++--------+-------+---------+------+------+---------+--------+----------+      //similar
+|   1005 | james | trainee | 7098 | NULL | 2000.00 |     50 |     NULL |
+|   1008 | mark  | trainee | 7013 | NULL |  900.00 |     50 |     NULL |
++--------+-------+---------+------+------+---------+--------+----------+
+2 rows in set (0.00 sec)
+
+=>INSTR
+mysql> select ename,job,instr(job,'man') from emp;
++--------+---------+------------------+
+| ename  | job     | instr(job,'man') |
++--------+---------+------------------+
+| betty  | manager |                1 |
+| john   | manager |                1 |
+| martin | clerk   |                0 |
+| cindy  | analyst |                0 |
+| james  | trainee |                0 |
+| anna   | clerk   |                0 |
+| steven | analyst |                0 |
+| mark   | trainee |                0 |
+| steven | clerk   |                0 |
++--------+---------+------------------+
+9 rows in set (0.06 sec)
+
+mysql> select ename,job,instr(job,'nee') from emp;
++--------+---------+------------------+
+| ename  | job     | instr(job,'nee') |
++--------+---------+------------------+
+| betty  | manager |                0 |
+| john   | manager |                0 |
+| martin | clerk   |                0 |
+| cindy  | analyst |                0 |
+| james  | trainee |                5 |
+| anna   | clerk   |                0 |
+| steven | analyst |                0 |
+| mark   | trainee |                5 |
+| steven | clerk   |                0 |
++--------+---------+------------------+
+9 rows in set (0.00 sec)
+
+=>CONCAT
+
+mysql> select concat(ename,' work as ',job) from emp;
++-------------------------------+
+| concat(ename,' work as ',job) |
++-------------------------------+
+| betty work as manager         |
+| john work as manager          |
+| martin work as clerk          |
+| cindy work as analyst         |
+| james work as trainee         |
+| anna work as clerk            |
+| steven work as analyst        |
+| mark work as trainee          |
+| steven work as clerk          |
++-------------------------------+
+9 rows in set (0.07 sec)
