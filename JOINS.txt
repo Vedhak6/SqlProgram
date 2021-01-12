@@ -1,0 +1,175 @@
+
+JOINS AND ALIASING
+
+mysql> select * from emp;
++--------+--------+---------+---------+--------+------------+------+
+| emp_id | ename  | job     | sal     | deptno | commission | mgr  |
++--------+--------+---------+---------+--------+------------+------+
+|   1001 | betty  | manager | 3000.00 |     50 |       NULL | 7645 |
+|   1002 | john   | manager | 2500.00 |     52 |       NULL | 7569 |
+|   1003 | martin | clerk   | 1100.00 |     56 |        300 | 7134 |
+|   1004 | cindy  | analyst | 2700.00 |     51 |        500 | 7568 |
+|   1005 | james  | trainee | 2000.00 |     50 |       NULL | 7098 |
+|   1006 | anna   | clerk   | 1000.00 |     52 |        400 | 7435 |
+|   1007 | steven | analyst | 2000.00 |     55 |       NULL | 7543 |
+|   1008 | mark   | trainee |  900.00 |     50 |       NULL | 7013 |
+|   1009 | steven | clerk   |  870.00 |     51 |        100 | 7098 |
++--------+--------+---------+---------+--------+------------+------+
+9 rows in set (1.04 sec)
+
+mysql> select * from dept;
++--------+----------+
+| deptno | deptname |
++--------+----------+
+|     50 | Cs       |
+|     51 | is       |
+|     52 | ec       |
+|     53 | Me       |
+|     54 | EE       |
+|     55 | Cs       |
+|     56 | Is       |
++--------+----------+
+7 rows in set (0.18 sec)
+
+mysql> select E.ename,D.deptname
+    -> from emp E,dept as D;                //ALIASING
++--------+----------+
+| ename  | deptname |
++--------+----------+
+| betty  | Cs       |
+| betty  | is       |
+| betty  | ec       |
+| betty  | Me       |
+| betty  | EE       |
+| betty  | Cs       |
+| betty  | Is       |
+| john   | Cs       |
+| john   | is       |
+| john   | ec       |
+| john   | Me       |
+| john   | EE       |
+| john   | Cs       |
+| john   | Is       |
+| martin | Cs       |
+| martin | is       |
+| martin | ec       |
+| martin | Me       |
+| martin | EE       |
+| martin | Cs       |
+| martin | Is       |
+| cindy  | Cs       |
+| cindy  | is       |
+| cindy  | ec       |
+| cindy  | Me       |
+| cindy  | EE       |
+| cindy  | Cs       |
+| cindy  | Is       |
+| james  | Cs       |
+| james  | is       |
+| james  | ec       |
+| james  | Me       |
+| james  | EE       |
+| james  | Cs       |
+| james  | Is       |
+| anna   | Cs       |
+| anna   | is       |
+| anna   | ec       |
+| anna   | Me       |
+| anna   | EE       |
+| anna   | Cs       |
+| anna   | Is       |
+| steven | Cs       |
+| steven | is       |
+| steven | ec       |
+| steven | Me       |
+| steven | EE       |
+| steven | Cs       |
+| steven | Is       |
+| mark   | Cs       |
+| mark   | is       |
+| mark   | ec       |
+| mark   | Me       |
+| mark   | EE       |
+| mark   | Cs       |
+| mark   | Is       |
+| steven | Cs       |
+| steven | is       |
+| steven | ec       |
+| steven | Me       |
+| steven | EE       |
+| steven | Cs       |
+| steven | Is       |
++--------+----------+
+63 rows in set (0.47 sec)
+
+
+mysql> select E.ename,E.sal,D.deptname
+    -> from emp E,dept as D
+    -> where E.deptno=D.deptno;
++--------+---------+----------+
+| ename  | sal     | deptname |
++--------+---------+----------+
+| betty  | 3000.00 | Cs       |
+| john   | 2500.00 | ec       |
+| martin | 1100.00 | Is       |
+| cindy  | 2700.00 | is       |
+| james  | 2000.00 | Cs       |
+| anna   | 1000.00 | ec       |
+| steven | 2000.00 | Cs       |
+| mark   |  900.00 | Cs       |
+| steven |  870.00 | is       |
++--------+---------+----------+
+9 rows in set (0.18 sec)
+
+
+mysql> select E.ename,E.sal,D.deptname
+    -> from emp E,dept as D
+    -> where E.deptno=D.deptno
+    -> and E.sal>=2000;
++--------+---------+----------+
+| ename  | sal     | deptname |
++--------+---------+----------+
+| betty  | 3000.00 | Cs       |
+| john   | 2500.00 | ec       |
+| cindy  | 2700.00 | is       |
+| james  | 2000.00 | Cs       |
+| steven | 2000.00 | Cs       |
++--------+---------+----------+
+5 rows in set (0.07 sec)
+
+
+
+1] Display empname,emp job
+mysql> select E.ename,E.job,D.dname,D.location
+    -> from emp E,dept D
+    -> where E.deptno=D.deptno
+    -> and E.job='manager'
+    -> and D.location in ('new york'.'chicago');
+
+
+2]
+mysql> select E.ename,E.job,D.deptname
+    -> from emp E,dept as D
+    -> where E.deptno=D.deptno
+    -> and E.job='manager';
++-------+---------+----------+
+| ename | job     | deptname |
++-------+---------+----------+
+| betty | manager | Cs       |
+| john  | manager | ec       |
++-------+---------+----------+
+2 rows in set (0.07 sec)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
