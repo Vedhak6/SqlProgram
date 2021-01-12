@@ -1,0 +1,143 @@
+
+DATE FUNCTION
+
+mysql> select curdate() from dual;
++------------+
+| curdate()  |
++------------+
+| 2021-01-12 |
++------------+
+1 row in set (0.08 sec)
+
+mysql> select CURRENT_DATE() from dual;
++----------------+
+| CURRENT_DATE() |
++----------------+
+| 2021-01-12     |
++----------------+
+1 row in set (0.00 sec)
+
+mysql> select CURRENT_DATE from dual;
++--------------+
+| CURRENT_DATE |
++--------------+
+| 2021-01-12   |
++--------------+
+1 row in set (0.00 sec)
+
+mysql> select now() from dual;
++---------------------+
+| now()               |
++---------------------+
+| 2021-01-12 12:00:31 |
++---------------------+
+1 row in set (0.04 sec)
+
+mysql> select current_time() from dual;
++----------------+
+| current_time() |
++----------------+
+| 12:00:52       |
++----------------+
+1 row in set (0.04 sec)
+
+mysql> select current_time() from dual;
++----------------+
+| current_time() |
++----------------+
+| 12:01:03       |
++----------------+
+1 row in set (0.00 sec)
+
+mysql> select CURRENT_DATE()+1 from dual;
++------------------+
+| CURRENT_DATE()+1 |
++------------------+
+|         20210113 |
++------------------+
+1 row in set (0.03 sec)
+
+mysql> select DAYNAME('2020-12-08) from dual;
+    '>
+    '> select DAYNAME('2020-12-08) from dual;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '2020-12-08) from dual' at line 3
+mysql> select DAYNAME('2020-12-08') from dual;
++-----------------------+
+| DAYNAME('2020-12-08') |
++-----------------------+
+| Tuesday               |
++-----------------------+
+1 row in set (0.20 sec)
+
+mysql> select DAYNAME('1998-11-06') from dual;
++-----------------------+
+| DAYNAME('1998-11-06') |
++-----------------------+
+| Friday                |
++-----------------------+
+1 row in set (0.00 sec)
+
+mysql> select WEEKDAY('1998-11-06') from dual;
++-----------------------+
+| WEEKDAY('1998-11-06') |
++-----------------------+
+|                     4 |
++-----------------------+
+1 row in set (0.24 sec)
+
+mysql> select WEEKDAY('2020-12-08') from dual;
++-----------------------+
+| WEEKDAY('2020-12-08') |
++-----------------------+
+|                     1 |
++-----------------------+
+1 row in set (0.00 sec)
+
+mysql> select LAST_DAY('2020-12-08') from dual;
++------------------------+
+| LAST_DAY('2020-12-08') |
++------------------------+
+| 2020-12-31             |
++------------------------+
+1 row in set (0.07 sec)
+
+mysql> select WEEKOFYEAR('2020-12-08') from dual;
++--------------------------+
+| WEEKOFYEAR('2020-12-08') |
++--------------------------+
+|                       50 |
++--------------------------+
+1 row in set (0.07 sec)
+
+mysql> select SYSDATE from dual;
+ERROR 1054 (42S22): Unknown column 'SYSDATE' in 'field list'
+mysql> select SYSDATE() from dual;
++---------------------+
+| SYSDATE()           |
++---------------------+
+| 2021-01-12 12:16:30 |
++---------------------+
+1 row in set (0.04 sec)
+
+
+mysql> select TO_DAYS(now()) from dual;
++----------------+
+| TO_DAYS(now()) |
++----------------+
+|         738167 |
++----------------+
+1 row in set (0.07 sec)
+
+mysql> select DATOFYEAR('2020-12-08') from dual;
+ERROR 1305 (42000): FUNCTION emp.DATOFYEAR does not exist
+mysql> select DAYOFYEAR('2020-12-08') from dual;
++-------------------------+
+| DAYOFYEAR('2020-12-08') |
++-------------------------+
+|                     343 |
++-------------------------+
+1 row in set (0.04 sec)
+
+mysql>
+
+
