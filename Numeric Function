@@ -1,0 +1,115 @@
+
+NUMERIC FUNCTION
+
+=>MOD
+
+dispaly the emp details who is earning odd no of salary
+mysql> select * from emp
+    -> where sal%2<>0;
+Empty set (3.59 sec)
+
+
+=>
+mysql> select MOD(10,2) from dual;
++-----------+
+| MOD(10,2) |
++-----------+
+|         0 |
++-----------+
+1 row in set (0.27 sec)
+
+mysql> select 10%2 from dual;
++------+
+| 10%2 |
++------+
+|    0 |
++------+
+1 row in set (0.00 sec)
+
+mysql> select 10 mod 2 from dual;
++----------+
+| 10 mod 2 |
++----------+
+|        0 |
++----------+
+1 row in set (0.00 sec)
+
+mysql> select 10 div 2 from dual;
++----------+
+| 10 div 2 |
++----------+
+|        5 |
++----------+
+1 row in set (0.07 sec)
+
+mysql> select sqrt(100) from dual;
++-----------+
+| sqrt(100) |
++-----------+
+|        10 |
++-----------+
+1 row in set (0.63 sec)
+
+mysql> select sqrt(1000) from dual;
++--------------------+
+| sqrt(1000)         |
++--------------------+
+| 31.622776601683793 |
++--------------------+
+1 row in set (0.00 sec)
+
+mysql> select sqrt(1064) from dual;
++-------------------+
+| sqrt(1064)        |
++-------------------+
+| 32.61901286060018 |
++-------------------+
+1 row in set (0.00 sec)
+
+mysql> select sqrt(10000) from dual;
++-------------+
+| sqrt(10000) |
++-------------+
+|         100 |
++-------------+
+1 row in set (0.00 sec)
+
+mysql> select degrees(1.5) from dual;
++-------------------+
+| degrees(1.5)      |
++-------------------+
+| 85.94366926962348 |
++-------------------+
+1 row in set (0.21 sec)
+
+mysql> select (-234.55) from dual;
++-----------+
+| (-234.55) |
++-----------+
+|   -234.55 |
++-----------+
+1 row in set (0.09 sec)
+
+mysql> select abs (-234.55) from dual;
++---------------+
+| abs (-234.55) |
++---------------+
+|        234.55 |
++---------------+
+1 row in set (0.09 sec)
+
+mysql> select round (-234.55) from dual;
++-----------------+
+| round (-234.55) |
++-----------------+
+|            -235 |
++-----------------+
+1 row in set (0.06 sec)
+
+mysql> select round (-234.45) from dual;
++-----------------+
+| round (-234.45) |
++-----------------+
+|            -234 |
++-----------------+
+1 row in set (0.00 sec)
